@@ -15,6 +15,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-=4trc@-^i=7o$_p+m7a(h4e5=la*u$$td3fjekfvxo8#oiy&md')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
+DEBUG = True  # Убедитесь, что это True
+
 ALLOWED_HOSTS = [
     'portfolio-4r9p.onrender.com', 
     'localhost', 
@@ -24,7 +26,7 @@ ALLOWED_HOSTS = [
 
 # Security settings for production
 if not DEBUG:
-    SECURE_SSL_REDIRECT = True
+
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
@@ -118,8 +120,11 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Whitenoise configuration
+# STORAGES configuration for Django 5.2+
 STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },

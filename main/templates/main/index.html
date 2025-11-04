@@ -52,21 +52,21 @@
                     {% endfor %}
                 </div>
                 
-                <div class="project-actions">
-                    <a href="{{ project.github_url }}" class="btn btn-secondary" target="_blank">
-                        <i class="fab fa-github"></i> Code
-                    </a>
-                    {% if project.live_url != "#" %}
-                    <a href="{{ project.live_url }}" class="btn btn-secondary" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Live Demo
-                    </a>
-                    {% endif %}
-                    {% if project.download_url != "#" %}
-                    <a href="{{ project.download_url }}" class="btn btn-primary">
-                        <i class="fas fa-download"></i> Download
-                    </a>
-                    {% endif %}
-                </div>
+               <div class="project-actions">
+    <a href="{{ project.github_url }}" class="btn btn-secondary" target="_blank">
+        <i class="fab fa-github"></i> Code
+    </a>
+    {% if project.live_url and project.live_url != "#" %}
+    <a href="{{ project.live_url }}" class="btn btn-secondary" target="_blank">
+        <i class="fas fa-external-link-alt"></i> Live Demo
+    </a>
+    {% endif %}
+    {% if project.download_url and project.download_url != "#" %}
+    <a href="{{ project.download_url }}" class="btn btn-primary">
+        <i class="fas fa-download"></i> Download
+    </a>
+    {% endif %}
+</div>
                 
 
             </div>
