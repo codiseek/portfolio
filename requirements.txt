@@ -1,6 +1,5 @@
-# Создайте файл requirements.txt в корне проекта
-echo "Django==5.2.7
+Django==5.2.7
 gunicorn==23.0.0
 Pillow==10.4.0
 whitenoise==6.8.0
-psycopg2-binary==2.9.10" > requirements.txt
+psycopg2-binary==2.9.10
