@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <nav class="nav">
+            <div class="logo-container">
+                <img src="/static/logo.svg" alt="DevPortfolio" class="logo-svg">
+            </div>
+        </nav>
+    </div>
+</header>
+
+
+<!-- Projects Section -->
+<section class="projects-section" id="projects">
+    <div class="container">
+        
+        <div class="projects-grid">
+            {% for project in projects %}
+            <div class="project-card">
+                <div class="project-header">
+                    <a href="{{ project.github_url }}" class="project-title" target="_blank">
+                         {{ project.title }}
+                    </a>
+                    <div class="project-stats">
+                        <span class="stat">
+                            <i class="fas fa-star"></i> {{ project.stars }}
+                        </span>
+                        <span class="stat">
+                            <i class="fas fa-code-branch"></i> {{ project.forks }}
+                        </span>
+                    </div>
+                </div>
+                
+         <div class="project-image">
+            {% if project.image_url %}
+                <img src="{{ project.image_url }}" alt="{{ project.title }}" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'width:100%;height:100%;background:linear-gradient(45deg,#161b22,#0d1117);display:flex;align-items:center;justify-content:center;color:#8b949e;\'><i class=\'fas fa-image fa-2x\'></i></div>'">
+            {% else %}
+                <div style="width:100%;height:100%;background:linear-gradient(45deg,#161b22,#0d1117);display:flex;align-items:center;justify-content:center;color:#8b949e;">
+                    <i class="fas fa-image fa-2x"></i>
+                </div>
+            {% endif %}
+        </div>
+                
+                <p class="project-description">{{ project.description }}</p>
+                
+                <div class="project-tech">
+                    {% for tech in project.technologies %}
+                    <span class="tech-tag">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+                
+                <div class="project-actions">
+                    <a href="{{ project.github_url }}" class="btn btn-secondary" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                    {% if project.live_url != "#" %}
+                    <a href="{{ project.live_url }}" class="btn btn-secondary" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                    {% endif %}
+                    {% if project.download_url != "#" %}
+                    <a href="{{ project.download_url }}" class="btn btn-primary">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                    {% endif %}
+                </div>
+                
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" id="contact">
+    <div class="container">
+        <div class="footer-links">
+            
+            <a href="https://github.com/codiseek" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            
+            <a href="https://t.me/codiseek" target="_blank">
+                <i class="fab fa-telegram"></i> Telegram
+            </a>
+        </div>
+        <p class="copyright">
+            Hello, world! [C]
+        </p>
+    </div>
+</footer>
+{% endblock %}
