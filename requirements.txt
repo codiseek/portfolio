@@ -1,0 +1,17 @@
+# Django
+Django==5.2.7
+
+# WSGI сервер для production
+gunicorn==23.0.0
+
+# Для работы с изображениями
+Pillow==10.4.0
+
+# Для обслуживания статических файлов
+whitenoise==6.8.0
+
+# База данных (если используете PostgreSQL)
+psycopg2-binary==2.9.10
+
+# Дополнительные утилиты
+python-dotenv==1.0.1
