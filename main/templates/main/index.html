@@ -2,95 +2,423 @@
 
 {% block content %}
 <!-- Header -->
-<header class="header">
-    <div class="container">
-        <nav class="nav">
-            <div class="logo-container">
-                <img src="/static/logo.svg" alt="DevPortfolio" class="logo-svg">
+<header class="border-b border-dark-700">
+    <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <img src="/static/logo.svg" alt="codiseek" class="h-8 w-auto">
             </div>
-        </nav>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#projects" class="hover:text-accent-blue transition-colors">./projects</a>
+                <a href="#about" class="hover:text-accent-blue transition-colors">./about</a>
+                <a href="#contact" class="hover:text-accent-blue transition-colors">./contact</a>
+            </nav>
+        </div>
     </div>
 </header>
 
+<!-- Hero Section -->
+<section class="relative overflow-hidden py-20">
+    <div class="absolute inset-0 bg-gradient-to-br from-dark-800 to-dark-900"></div>
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
 
-<!-- Projects Section -->
-<section class="projects-section" id="projects">
-    <div class="container">
-        
-        <div class="projects-grid">
-            {% for project in projects %}
-            <div class="project-card">
-                <div class="project-header">
-                    <a href="{{ project.github_url }}" class="project-title" target="_blank">
-                         {{ project.title }}
-                    </a>
-                    <div class="project-stats">
-                        <span class="stat">
-                            <i class="fas fa-star"></i> {{ project.stars }}
-                        </span>
-                        <span class="stat">
-                            <i class="fas fa-code-branch"></i> {{ project.forks }}
-                        </span>
-                    </div>
-                </div>
-                
-         <div class="project-image">
-            {% if project.image_url %}
-                <img src="{{ project.image_url }}" alt="{{ project.title }}" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'width:100%;height:100%;background:linear-gradient(45deg,#161b22,#0d1117);display:flex;align-items:center;justify-content:center;color:#8b949e;\'><i class=\'fas fa-image fa-2x\'></i></div>'">
-            {% else %}
-                <div style="width:100%;height:100%;background:linear-gradient(45deg,#161b22,#0d1117);display:flex;align-items:center;justify-content:center;color:#8b949e;">
-                    <i class="fas fa-image fa-2x"></i>
-                </div>
-            {% endif %}
-        </div>
-                
-                <p class="project-description">{{ project.description }}</p>
-                
-                <div class="project-tech">
-                    {% for tech in project.technologies %}
-                    <span class="tech-tag">{{ tech }}</span>
-                    {% endfor %}
-                </div>
-                
-               <div class="project-actions">
-    <a href="{{ project.github_url }}" class="btn btn-secondary" target="_blank">
-        <i class="fab fa-github"></i> Code
-    </a>
-    {% if project.live_url and project.live_url != "#" %}
-    <a href="{{ project.live_url }}" class="btn btn-secondary" target="_blank">
-        <i class="fas fa-external-link-alt"></i> Live Demo
-    </a>
-    {% endif %}
-    {% if project.download_url and project.download_url != "#" %}
-    <a href="{{ project.download_url }}" class="btn btn-primary">
-        <i class="fas fa-download"></i> Download
-    </a>
-    {% endif %}
-</div>
-                
-
+           <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 whitespace-nowrap">
+    <span class="text-accent-blue">&lt;</span>
+    codiseek
+    <span class="text-accent-blue">/&gt;</span>
+</h1>
+            <p class="text-xl text-gray-400 mb-8 leading-relaxed">
+                $ cat about_me.txt<br>
+                Full-stack developer & open-source enthusiast<br>
+                Building the future one commit at a time
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://github.com/codiseek" class="px-8 py-3 bg-accent-blue text-white rounded-lg hover:bg-blue-600 transition-colors font-semibold text-center">
+                    <i class="fab fa-github mr-2"></i>View GitHub
+                </a>
+                <a href="https://t.me/codiseek" class="px-8 py-3 border border-dark-600 text-gray-300 rounded-lg hover:border-accent-green transition-colors text-center">
+                    <i class="fas fa-paper-plane mr-2"></i>Contact Me
+                </a>
             </div>
-            {% endfor %}
         </div>
     </div>
 </section>
 
-<!-- Footer -->
-<footer class="footer" id="contact">
-    <div class="container">
-        <div class="footer-links">
-            
-            <a href="https://github.com/codiseek" target="_blank">
-                <i class="fab fa-github"></i> GitHub
-            </a>
-            
-            <a href="https://t.me/codiseek" target="_blank">
-                <i class="fab fa-telegram"></i> Telegram
-            </a>
+<!-- Projects Section -->
+<section id="projects" class="py-20 bg-dark-800">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                <span class="text-accent-green">#</span> featured_projects
+            </h2>
+          
         </div>
-        <p class="copyright">
-            Hello, world! [C]
-        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+    {% for project in projects %}
+    <div class="group bg-dark-700 rounded-xl border border-dark-600 hover:border-accent-blue transition-all duration-300 hover:transform hover:-translate-y-2" 
+     data-project-id="{{ project.id }}">
+        <!-- Project Header -->
+        <div class="p-6 border-b border-dark-600">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-xl font-bold text-white group-hover:text-accent-blue transition-colors">
+                    {{ project.title }}
+                </h3>
+                <div class="flex space-x-3 text-sm">
+                    <span class="flex items-center space-x-1 text-gray-400">
+                        <i class="fas fa-star"></i>
+                        <span>{{ project.stars }}</span>
+                    </span>
+                    <span class="flex items-center space-x-1 text-gray-400">
+                        <i class="fas fa-code-branch"></i>
+                        <span>{{ project.forks }}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+<!-- Project Image -->
+<div class="h-48 bg-dark-600 relative overflow-hidden group project-image">
+    {% if project.main_image_url %}
+    <img src="{{ project.main_image_url }}" alt="{{ project.title }}" 
+         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer project-image-clickable"
+         data-project-id="{{ project.id }}">
+    {% else %}
+    <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-dark-600 to-dark-700 cursor-pointer project-image-clickable project-image-placeholder"
+         data-project-id="{{ project.id }}">
+        <i class="fas fa-project-diagram text-4xl text-gray-500"></i>
+    </div>
+    {% endif %}
+    <!-- Затемняющий слой с pointer-events-none -->
+    <div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-20 transition-all pointer-events-none"></div>
+    
+    <!-- Иконка просмотра скриншотов -->
+    {% if project.screenshots or project.main_image_url %}
+    <div class="absolute top-2 right-2 bg-black bg-opacity-50 text-white p-2 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity expand-icon"
+         data-project-id="{{ project.id }}">
+        <i class="fas fa-expand"></i>
+    </div>
+    {% endif %}
+</div>
+
+        <!-- Project Content -->
+        <div class="p-6">
+            <p class="text-gray-400 mb-4 leading-relaxed">
+                {{ project.description }}
+            </p>
+
+            <!-- Technologies -->
+            <div class="flex flex-wrap gap-2 mb-6">
+                {% for tech in project.technologies %}
+                <span class="px-3 py-1 bg-dark-600 text-gray-300 rounded-full text-sm border border-dark-500">
+                    {{ tech }}
+                </span>
+                {% endfor %}
+            </div>
+
+            <!-- Actions -->
+            <div class="flex space-x-3">
+                <a href="{{ project.github_url }}" 
+                   class="flex-1 bg-dark-600 hover:bg-accent-blue text-white py-2 px-4 rounded-lg text-center transition-colors text-sm font-medium">
+                    <i class="fab fa-github mr-2"></i>Code
+                </a>
+                {% if project.live_url and project.live_url != "#" %}
+                <a href="{{ project.live_url }}" 
+                   class="flex-1 border border-dark-500 hover:border-accent-green text-gray-300 py-2 px-4 rounded-lg text-center transition-colors text-sm font-medium">
+                    <i class="fas fa-external-link-alt mr-2"></i>Live
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+    </div>
+</section>
+
+
+<!-- Модальное окно для скриншотов -->
+<div id="screenshotsModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
+    <div class="relative w-full max-w-6xl max-h-[90vh] bg-dark-800 rounded-2xl border border-dark-600 overflow-hidden">
+        <!-- Заголовок и кнопка закрытия -->
+        <div class="flex justify-between items-center p-6 border-b border-dark-600 bg-dark-700">
+            <h3 id="modalProjectTitle" class="text-2xl font-bold text-white"></h3>
+            <button id="closeModal" class="text-gray-400 hover:text-white text-2xl transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- Контент с прокруткой -->
+        <div class="overflow-y-auto max-h-[calc(90vh-120px)] p-6">
+            <!-- Основное изображение -->
+            <div id="modalMainImage" class="mb-6 rounded-lg overflow-hidden">
+                <img id="mainModalImage" src="" alt="" class="w-full h-auto max-h-80 object-contain rounded-lg">
+            </div>
+            
+            <!-- Слайдер скриншотов -->
+            <div id="screenshotsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                <!-- Скриншоты будут добавляться сюда через JavaScript -->
+            </div>
+            
+            <!-- Навигация для одиночного просмотра -->
+            <div id="singleViewNav" class="flex justify-between items-center mt-6 hidden">
+                <button id="prevScreenshot" class="bg-dark-700 hover:bg-accent-blue text-white px-6 py-2 rounded-lg transition-colors">
+                    <i class="fas fa-chevron-left mr-2"></i>Назад
+                </button>
+                <div id="screenshotCounter" class="text-gray-400 text-sm"></div>
+                <button id="nextScreenshot" class="bg-dark-700 hover:bg-accent-blue text-white px-6 py-2 rounded-lg transition-colors">
+                    Вперед<i class="fas fa-chevron-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Глобальный объект для хранения данных проектов
+window.projectsData = {
+    {% for project in projects %}
+    "{{ project.id }}": {
+        id: "{{ project.id }}",
+        title: "{{ project.title|escapejs }}",
+        main_image_url: "{{ project.main_image_url|default:'' }}",
+        screenshots: [
+            {% for screenshot in project.screenshots %}
+            {
+                image_url: "{{ screenshot.image_url }}",
+                title: "{{ screenshot.title|escapejs }}"
+            }{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        ]
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+};
+
+class ScreenshotsModal {
+    constructor() {
+        this.modal = document.getElementById('screenshotsModal');
+        this.container = document.getElementById('screenshotsContainer');
+        this.mainImage = document.getElementById('modalMainImage');
+        this.mainModalImage = document.getElementById('mainModalImage');
+        this.projectTitle = document.getElementById('modalProjectTitle');
+        this.counter = document.getElementById('screenshotCounter');
+        this.prevBtn = document.getElementById('prevScreenshot');
+        this.nextBtn = document.getElementById('nextScreenshot');
+        this.singleViewNav = document.getElementById('singleViewNav');
+        
+        this.currentProject = null;
+        this.currentIndex = 0;
+        this.isSingleView = false;
+        
+        this.initEvents();
+    }
+    
+    initEvents() {
+        // Закрытие модального окна
+        document.getElementById('closeModal').addEventListener('click', () => this.close());
+        
+        // Закрытие по клику на фон
+        this.modal.addEventListener('click', (e) => {
+            if (e.target === this.modal) this.close();
+        });
+        
+        // Навигация
+        this.prevBtn.addEventListener('click', () => this.navigate(-1));
+        this.nextBtn.addEventListener('click', () => this.navigate(1));
+        
+        // Закрытие по Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') this.close();
+            if (this.isSingleView) {
+                if (e.key === 'ArrowLeft') this.navigate(-1);
+                if (e.key === 'ArrowRight') this.navigate(1);
+            }
+        });
+    }
+    
+    open(projectId) {
+        const project = window.projectsData[projectId];
+        if (!project) {
+            console.error('Project not found:', projectId);
+            return;
+        }
+        
+        this.currentProject = project;
+        this.currentIndex = 0;
+        this.isSingleView = false;
+        this.render();
+        this.modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    close() {
+        this.modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+        this.currentProject = null;
+        this.isSingleView = false;
+    }
+    
+    render() {
+        if (!this.currentProject) return;
+        
+        this.projectTitle.textContent = this.currentProject.title;
+        this.container.innerHTML = '';
+        
+        // Показываем главное изображение если есть
+        if (this.currentProject.main_image_url) {
+            this.mainModalImage.src = this.currentProject.main_image_url;
+            this.mainModalImage.alt = this.currentProject.title;
+            this.mainImage.classList.remove('hidden');
+        } else {
+            this.mainImage.classList.add('hidden');
+        }
+        
+        // Рендерим скриншоты
+        if (this.currentProject.screenshots && this.currentProject.screenshots.length > 0) {
+            this.currentProject.screenshots.forEach((screenshot, index) => {
+                const screenshotElement = this.createScreenshotElement(screenshot, index);
+                this.container.appendChild(screenshotElement);
+            });
+        } else {
+            this.container.innerHTML = '<p class="text-gray-400 text-center col-span-3">Нет скриншотов для этого проекта</p>';
+        }
+        
+        this.singleViewNav.classList.add('hidden');
+        this.updateNavigation();
+    }
+    
+    createScreenshotElement(screenshot, index) {
+        const div = document.createElement('div');
+        div.className = 'group cursor-pointer transform hover:scale-105 transition-transform duration-300';
+        div.innerHTML = `
+            <div class="bg-dark-600 rounded-lg overflow-hidden border-2 border-transparent group-hover:border-accent-blue">
+                <img src="${screenshot.image_url}" 
+                     alt="${screenshot.title || 'Скриншот'}" 
+                     class="w-full h-48 object-cover"
+                     onclick="window.screenshotsModal.viewScreenshot(${index})">
+            </div>
+            ${screenshot.title ? `
+                <p class="text-gray-400 text-sm mt-2 text-center">${screenshot.title}</p>
+            ` : ''}
+        `;
+        return div;
+    }
+    
+    viewScreenshot(index) {
+        this.currentIndex = index;
+        this.isSingleView = true;
+        this.showSingleScreenshot();
+    }
+    
+    showSingleScreenshot() {
+        const screenshot = this.currentProject.screenshots[this.currentIndex];
+        this.container.innerHTML = `
+            <div class="col-span-3 flex justify-center">
+                <div class="max-w-4xl text-center">
+                    <img src="${screenshot.image_url}" 
+                         alt="${screenshot.title || 'Скриншот'}" 
+                         class="w-full h-auto max-h-96 object-contain rounded-lg mx-auto">
+                    ${screenshot.title ? `
+                        <p class="text-white text-center mt-4 text-lg">${screenshot.title}</p>
+                    ` : ''}
+                </div>
+            </div>
+        `;
+        
+        this.mainImage.classList.add('hidden');
+        this.singleViewNav.classList.remove('hidden');
+        this.updateNavigation();
+    }
+    
+    navigate(direction) {
+        if (!this.isSingleView) return;
+        
+        const newIndex = this.currentIndex + direction;
+        if (newIndex >= 0 && newIndex < this.currentProject.screenshots.length) {
+            this.currentIndex = newIndex;
+            this.showSingleScreenshot();
+        }
+    }
+    
+    updateNavigation() {
+        const total = this.currentProject.screenshots.length;
+        
+        if (this.isSingleView && total > 1) {
+            this.counter.textContent = `${this.currentIndex + 1} / ${total}`;
+            this.prevBtn.disabled = this.currentIndex === 0;
+            this.nextBtn.disabled = this.currentIndex === total - 1;
+            
+            // Стили для disabled кнопок
+            this.prevBtn.classList.toggle('opacity-50', this.currentIndex === 0);
+            this.prevBtn.classList.toggle('cursor-not-allowed', this.currentIndex === 0);
+            this.nextBtn.classList.toggle('opacity-50', this.currentIndex === total - 1);
+            this.nextBtn.classList.toggle('cursor-not-allowed', this.currentIndex === total - 1);
+        } else {
+            this.counter.textContent = '';
+        }
+    }
+}
+
+// Инициализация модального окна при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    // Создаем глобальный экземпляр модального окна
+    window.screenshotsModal = new ScreenshotsModal();
+    
+    // Добавляем обработчики для клика по изображениям проектов
+    document.querySelectorAll('.project-image-clickable').forEach(element => {
+        element.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const projectId = this.getAttribute('data-project-id');
+            if (projectId) {
+                window.screenshotsModal.open(projectId);
+            }
+        });
+    });
+    
+    // Добавляем обработчики для иконок расширения
+    document.querySelectorAll('.expand-icon').forEach(element => {
+        element.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const projectId = this.getAttribute('data-project-id');
+            if (projectId) {
+                window.screenshotsModal.open(projectId);
+            }
+        });
+    });
+    
+    console.log('Modal handlers initialized');
+    console.log('Projects data:', window.projectsData);
+});
+</script>
+
+
+
+<!-- Footer -->
+<footer class="bg-dark-900 border-t border-dark-700 py-12">
+    <div class="container mx-auto px-6">
+        <div class="text-center">
+            <div class="flex justify-center space-x-8 mb-6">
+                <a href="https://github.com/codiseek" class="text-gray-400 hover:text-accent-blue transition-colors">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://t.me/codiseek" class="text-gray-400 hover:text-accent-blue transition-colors">
+                    <i class="fab fa-telegram text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-gray-500 text-sm">
+                <span class="text-accent-green">$ echo</span> 
+                <span class="text-white">"Hello, World! 🚀"</span>
+            </p>
+            <p class="text-gray-500 text-sm mt-2">
+                &copy; 2024 codiseek. Built with 
+                <i class="fas fa-heart text-red-500 mx-1"></i>
+                and
+                <i class="fas fa-coffee text-yellow-500 mx-1"></i>
+            </p>
+        </div>
     </div>
 </footer>
 {% endblock %}
